@@ -224,13 +224,13 @@ def _check_information(df_data, date):
         else x
     )
 
-    records["near_basis"] = records["near_contract_price"] - records["spot_price"]
-    records["dom_basis"] = records["dominant_contract_price"] - records["spot_price"]
+    records["near_basis"] = records["spot_price"] - records["near_contract_price"]
+    records["dom_basis"] = records["spot_price"] - records["dominant_contract_price"]
     records["near_basis_rate"] = (
-        records["near_contract_price"] / records["spot_price"] - 1
+        1 - records["near_contract_price"] / records["spot_price"]
     )
     records["dom_basis_rate"] = (
-        records["dominant_contract_price"] / records["spot_price"] - 1
+        1 - records["dominant_contract_price"] / records["spot_price"]
     )
     records.loc[:, "date"] = date.strftime("%Y%m%d")
     return records
